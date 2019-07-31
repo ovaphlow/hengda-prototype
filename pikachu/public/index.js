@@ -41,7 +41,7 @@ const Home = () => {
       </datalist>
 
       <p className="text-center mt-2">
-        <button type="button" className="btn btn-primary" onClick={handleCommand}>
+        <button type="button" className="btn btn-primary btn-sm" onClick={handleCommand}>
           <i className="fa fa-fw fa-check"></i>
           发送
         </button>
