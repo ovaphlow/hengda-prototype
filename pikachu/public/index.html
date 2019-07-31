@@ -10,9 +10,9 @@
 
   <title>恒达交通</title>
 
-  <script type="text/javascript" src="lib/react/umd/react.development.js"></script>
-  <script type="text/javascript" src="lib/react-dom/umd/react-dom.development.js"></script>
-  <script type="text/javascript" src="lib/babel-core/browser.min.js"></script>
+  <script src="lib/react/umd/react.development.js"></script>
+  <script src="lib/react-dom/umd/react-dom.development.js"></script>
+  <script src="lib/babel-core/browser.min.js"></script>
 </head>
 
 <body>
@@ -29,108 +29,7 @@
   <div id="app"></div>
 
   <script src="/socket.io/socket.io.js"></script>
-
-  <script type="text/babel">
-    const Home = () => {
-      const [item_a, setItemA] = React.useState({
-        kongtiao: '空调',
-        unknown: 'UNKNOWN',
-        dianliu0: '电流0',
-        dianya0: '电压0',
-        dianliu1: '电流1',
-        dianya1: '电压1',
-        dianliu2: '电流2',
-        dianya2: '电压2',
-        carriage: '车厢号',
-        dianya110v0: '110V母线电压',
-        dianya110v1: '110v本车电压',
-        wendu: '车内温度'
-      })
-      const [item_b, setItemB] = React.useState({
-
-      })
-
-      React.useEffect(() => {
-        console.info(1111)
-      }, [])
-      return (
-        <div className="container">
-          <div className="card shadow">
-            <div className="card-body">
-              <ul className="list-inline">
-                <li className="list-inline-item">
-                  空调状态：
-                  <mark>{item_a.kongtiao}</mark>
-                </li>
-
-                <li className="list-inline-item">
-                  未知：
-                  <mark>{item_a.unknown}</mark>
-                </li>
-
-                <li className="list-inline-item">
-                  供电电流：
-                  <mark>{item_a.dianliu0}</mark>
-                </li>
-
-                <li className="list-inline-item">
-                  供电电压：
-                  <mark>{item_a.dianya0}</mark>
-                </li>
-
-                <li className="list-inline-item">
-                  供电电流：
-                  <mark>{item_a.dianliu1}</mark>
-                </li>
-
-                <li className="list-inline-item">
-                  供电电压：
-                  <mark>{item_a.dianya1}</mark>
-                </li>
-
-                <li className="list-inline-item">
-                  供电电流：
-                  <mark>{item_a.dianliu2}</mark>
-                </li>
-
-                <li className="list-inline-item">
-                  供电电压：
-                  <mark>{item_a.dianya2}</mark>
-                </li>
-
-                <li className="list-inline-item">
-                  车厢号：
-                  <mark>{item_a.carriage}</mark>
-                </li>
-
-                <li className="list-inline-item">
-                  110V母线电压：
-                  <mark>{item_a.dianya110v0}</mark>
-                </li>
-
-                <li className="list-inline-item">
-                  110V本车电压：
-                  <mark>{item_a.dianya110v1}</mark>
-                </li>
-
-                <li className="list-inline-item">
-                  车内温度：
-                  <mark>{item_a.wendu}</mark>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      )
-    }
-
-    ReactDOM.render(
-      <Home />,
-      document.getElementById('app')
-    ) 
-
-    var socket = io()
-  </script>
+  <script type="text/babel" src="index.js"></script>
 </body>
 
 </html>

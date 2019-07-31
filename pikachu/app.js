@@ -7,6 +7,7 @@ const server = require('http').createServer(app.callback())
 const io = require('socket.io')(server)
 
 const config = require('./config')
+const resolve = require('./service/resolve')
 
 app.use(serve(__dirname + '/public'))
 
@@ -15,6 +16,11 @@ io.on('connection', client => {
 
   client.on('event', data => {
     console.info(data)
+  })
+
+  client.on('command', data => {
+    let result = resolve.command(data)
+    io.emit('command', result)
   })
 
   client.on('disconnect', () => {
