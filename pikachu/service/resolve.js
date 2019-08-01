@@ -59,6 +59,10 @@ const frame_a = data => {
   return item
 }
 
+const frame_b = data => {
+  return ''
+}
+
 const resolve = {
   command: data => {
     console.info('解析', data)
@@ -71,8 +75,10 @@ const resolve = {
     if (_t === '0010') {
       let result = frame_a(data)
       return result
+    } else if (_t === '0018') {
+      let result = frame_b(data)
+      return result
     }
-    
   }
 }
 
