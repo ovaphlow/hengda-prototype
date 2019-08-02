@@ -60,6 +60,10 @@ const frame_a = data => {
 }
 
 const frame_b = data => {
+  console.info('B帧', data)
+  let item = {}
+  let _t = ''
+
   return ''
 }
 

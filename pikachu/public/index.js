@@ -139,7 +139,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="card shadow">
+      <div className="card shadow mt-3">
         <div className="card-body">
           <ul className="list-inline">
             <li className="list-inline-item">
