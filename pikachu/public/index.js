@@ -2,6 +2,7 @@ const socket = io()
 
 const Home = () => {
   const [item_a, setItemA] = React.useState({
+    frame: '',
     kongtiao: '空调',
     xianlu: '供电线路',
     dianliu0: '电流0',
@@ -16,10 +17,11 @@ const Home = () => {
     wendu: '车内温度'
   })
   const [item_b, setItemB] = React.useState({
+    frame: '',
     chesu: '防滑器车速',
-    chuanganqi: '防滑器传感器',
-    paifengfa0: '防滑器排风阀',
-    paifengfa1: '防滑器排风阀',
+    fanghuaqi_a: '防滑器传感器',
+    fanghuaqi_b: '防滑器排风阀',
+    fanghuaqi_c: '防滑器排风阀',
     wendu1: '轴1温度',
     wendu2: '轴2温度',
     wendu3: '轴3温度',
@@ -29,15 +31,22 @@ const Home = () => {
     wendu7: '轴7温度',
     wendu8: '轴8温度',
     wendu0: '车外温度',
-    valid: '有效数据标志',
+    valid_a: '有效数据标志',
+    valid_b: '有效数据标志',
     chemen1: '车门1状态',
     chemen2: '车门2状态',
-    dianliu0: '充电机总电流',
-    dianliu1: '充电电流',
-    dianya1: '逆变器I电压',
-    pinlv1: '逆变器I频率',
-    dianya2: '逆变器II电压',
-    pinlv2: '逆变器II频率',
+    dianliu_a: '充电机总电流',
+    dianliu_b: '充电电流',
+    dianya_i: '逆变器I电压',
+    pinlv_i: '逆变器I频率',
+    dianya_ii: '逆变器II电压',
+    pinlv_ii: '逆变器II频率',
+    yanhuo_a: '烟火传感器',
+    yanhuo_b: '烟火传感器',
+    yanhuo_c: '烟火传感器',
+    yanhuo_d: '烟火传感器',
+    yanhuo_e: '烟火传感器',
+    yanhuo_f: '烟火传感器',
   })
 
   const handleCommand = () => {
@@ -52,7 +61,8 @@ const Home = () => {
         window.alert(data.message)
         return
       }
-      setItemA(data)
+      if (data.frame === 'A') setItemA(data)
+      else if (data.frame === 'B') setItemB(data)
     })
 
   return (
@@ -74,6 +84,13 @@ const Home = () => {
       </p>
 
       <div className="card shadow">
+        <div className="card-header">
+          <h4>
+            A帧
+            <small className="pull-right text-secondary">{item_a.datime}</small>
+          </h4>
+        </div>
+
         <div className="card-body">
           <ul className="list-inline">
             <li className="list-inline-item">
@@ -140,6 +157,13 @@ const Home = () => {
       </div>
 
       <div className="card shadow mt-3">
+        <div className="card-header">
+          <h4>
+            B帧
+            <small className="pull-right text-secondary">{item_b.datime}</small>
+          </h4>
+        </div>
+
         <div className="card-body">
           <ul className="list-inline">
             <li className="list-inline-item">

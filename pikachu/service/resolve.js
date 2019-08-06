@@ -1,6 +1,10 @@
+const moment = require('moment')
+
 const frame_a = data => {
   console.info('A帧', data)
   let item = {}
+  item.frame = 'A'
+  item.datime = moment().format('YYYY-MM-DD HH:mm:ss')
   let _t = ''
 
   _t = parseInt(data[14]).toString(2)
@@ -62,9 +66,71 @@ const frame_a = data => {
 const frame_b = data => {
   console.info('B帧', data)
   let item = {}
+  item.frame = 'B'
+  item.datime = moment().format('YYYY-MM-DD HH:mm:ss')
   let _t = ''
 
-  return ''
+  item.chesu = parseInt(data.slice(14, 16), 16)
+
+  _t = parseInt(data[17]).toString(2)
+  while (_t.length < 8) _t = `0${_t}`
+  item.fanghuaqi_a = _t.slice(4, 8)
+
+  _t = parseInt(data[19]).toString(2)
+  while (_t.length < 8) _t = `0${_t}`
+  item.fanghuaqi_b = _t.slice(4, 8)
+
+  _t = parseInt(data[21]).toString(2)
+  while (_t.length < 8) _t = `0${_t}`
+  item.fanghuaqi_c = _t.slice(4, 8)
+
+  item.wendu1 = parseInt(data.slice(22, 24), 16)
+  item.wendu2 = parseInt(data.slice(24, 26), 16)
+  item.wendu3 = parseInt(data.slice(26, 28), 16)
+  item.wendu4 = parseInt(data.slice(28, 30), 16)
+  item.wendu5 = parseInt(data.slice(30, 32), 16)
+  item.wendu6 = parseInt(data.slice(32, 34), 16)
+  item.wendu7 = parseInt(data.slice(34, 36), 16)
+  item.wendu8 = parseInt(data.slice(36, 38), 16)
+  item.wendu0 = parseInt(data.slice(38, 40), 16)
+
+  _t = parseInt(data[42], 16).toString(2)
+  while (_t.length < 4) _t = `0${_t}`
+  item.valid_a = _t
+
+  _t = parseInt(data[43], 16).toString(2)
+  while (_t.length < 4) _t = `0${_t}`
+  item.valid_b = _t
+
+  _t = parseInt(data[44], 16).toString(2)
+  while (_t.length < 4) _t = `0${_t}`
+  item.chemen1 = _t
+
+  _t = parseInt(data[45], 16).toString(2)
+  while (_t.length < 4) _t = `0${_t}`
+  item.chemen2 = _t
+
+  item.dianliu_a = parseInt(data.slice(50, 52), 16)
+
+  item.dianliu_b = data.slice(52, 54)
+
+  item.dianya_i = parseInt(data.slice(56, 58), 16) * 2
+
+  item.pinlv_i = parseInt(data.slice(58, 60), 16)
+
+  item.dianya_ii = parseInt(data.slice(62, 64), 16) * 2
+
+  item.pinlv_ii = parseInt(data.slice(64, 66), 16)
+
+  item.yanhuo_a = parseInt(data[74], 16).toString(2)
+  item.yanhuo_b = parseInt(data[75], 16).toString(2)
+  item.yanhuo_c = parseInt(data[76], 16).toString(2)
+  item.yanhuo_d = parseInt(data[77], 16).toString(2)
+  item.yanhuo_e = parseInt(data[78], 16).toString(2)
+  item.yanhuo_f = parseInt(data[79], 16).toString(2)
+
+  console.info(item)
+  return item
 }
 
 const resolve = {
