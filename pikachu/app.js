@@ -8,14 +8,15 @@ const io = require('socket.io')(server)
 
 const config = require('./config')
 const resolve = require('./service/resolve')
+const logger = require('./logger')
 
 app.use(serve(__dirname + '/public'))
 
 io.on('connection', client => {
-  console.info('connected')
+  logger.info('<socket.io> 客户端连接')
 
   client.on('event', data => {
-    console.info(data)
+    logger.info(data)
   })
 
   client.on('command', data => {
@@ -24,10 +25,10 @@ io.on('connection', client => {
   })
 
   client.on('disconnect', () => {
-    console.info('disconnected')
+    logger.info('<socket.io> 客户端断开')
   })
 })
 
 server.listen(config.app.port, () => {
-  console.info(`${new Date()} 服务运行于端口 ${config.app.port}`)
+  logger.info(`服务运行于端口 ${config.app.port}`)
 })

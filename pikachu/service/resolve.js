@@ -1,7 +1,9 @@
 const moment = require('moment')
 
+const logger = require('../logger')
+
 const frame_a = data => {
-  console.info('A帧', data)
+  logger.info(`<socket.io> A帧`)
   let item = {}
   item.frame = 'A'
   item.datime = moment().format('YYYY-MM-DD HH:mm:ss')
@@ -64,25 +66,25 @@ const frame_a = data => {
 }
 
 const frame_b = data => {
-  console.info('B帧', data)
+  logger.info('<socket.io> B帧')
   let item = {}
   item.frame = 'B'
   item.datime = moment().format('YYYY-MM-DD HH:mm:ss')
   let _t = ''
 
-  item.chesu = parseInt(data.slice(14, 16), 16)
+  item.fanghuaqi_a = parseInt(data.slice(14, 16), 16)
 
   _t = parseInt(data[17]).toString(2)
   while (_t.length < 8) _t = `0${_t}`
-  item.fanghuaqi_a = _t.slice(4, 8)
+  item.fanghuaqi_b = _t.slice(4, 8)
 
   _t = parseInt(data[19]).toString(2)
   while (_t.length < 8) _t = `0${_t}`
-  item.fanghuaqi_b = _t.slice(4, 8)
+  item.fanghuaqi_c = _t.slice(4, 8)
 
   _t = parseInt(data[21]).toString(2)
   while (_t.length < 8) _t = `0${_t}`
-  item.fanghuaqi_c = _t.slice(4, 8)
+  item.fanghuaqi_d = _t.slice(4, 8)
 
   item.wendu1 = parseInt(data.slice(22, 24), 16)
   item.wendu2 = parseInt(data.slice(24, 26), 16)
@@ -129,13 +131,12 @@ const frame_b = data => {
   item.yanhuo_e = parseInt(data[78], 16).toString(2)
   item.yanhuo_f = parseInt(data[79], 16).toString(2)
 
-  console.info(item)
   return item
 }
 
 const resolve = {
   command: data => {
-    console.info('解析', data)
+    logger.info(`<socket.io> 解析 ${data}`)
     let _t = data.slice(0, 5)
     if (_t !== 'PLCR:' && _t !== 'PLCS:') return { message: '数据格式错误(0)' }
     if (data.slice(5, 8) !== '@01') return { message: '数据格式错误(5)'}
