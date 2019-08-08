@@ -6,29 +6,69 @@ const serve = require('koa-static');
 const server = require('http').createServer(app.callback())
 const io = require('socket.io')(server)
 
+const SerialPort = require('serialport')
+const port = new SerialPort('COM4', {
+  baudRate: 115200
+})
+
 const config = require('./config')
 const resolve = require('./service/resolve')
 const logger = require('./logger')
 
 app.use(serve(__dirname + '/public'))
 
-io.on('connection', client => {
+server.listen(config.app.port, () => {
+  logger.info(`<web> 服务运行于端口 ${config.app.port}`)
+})
+
+port.on('error', err => {
+  logger.error(`<serial> ${err}`)
+})
+
+port.on('open', () => {
+  logger.info(`<serial> 串口已打开`)
+})
+
+let _data = ''
+port.on('data', data => {
+  if (data.slice(0, 3).toString() === 'PLC') {
+    _data = data
+  } else {
+    _data += data
+    if (String.fromCharCode(data[data.length - 1]) === '*') {
+      io.emit('command', resolve.command(_data))
+    }
+  }
+})
+
+io.on('connection', socket => {
   logger.info('<socket.io> 客户端连接')
 
-  client.on('event', data => {
+  socket.on('event', data => {
     logger.info(data)
   })
 
-  client.on('command', data => {
+  socket.on('command', data => {
     let result = resolve.command(data)
     io.emit('command', result)
   })
 
-  client.on('disconnect', () => {
+  socket.on('disconnect', () => {
     logger.info('<socket.io> 客户端断开')
   })
 })
 
-server.listen(config.app.port, () => {
-  logger.info(`服务运行于端口 ${config.app.port}`)
-})
+const serialDataA = 'PLCR:@01WD0010804A2FCB2FCB2FCB0102C9C88120427E26*'
+const serialDataB = 'PLCR:@01WD00180000000021202020201F211F1E00FF130000028100BD3200BE32000000FEFFFFFF0000000000000000000000000024*'
+const timeout = false
+const loop = () => {
+  if (timeout) return
+  let _t = Math.floor(Math.random() * Math.floor(100))
+  if (_t < 40) {
+    port.write(serialDataA, err => { if (err) logger.error(`<serial> ${err}`) })
+  } else if (_t < 80) {
+    port.write(serialDataB, err => { if (err) logger.error(`<serial> ${err}`) })
+  }
+  setTimeout(loop, 2000)
+}
+loop()
