@@ -4,7 +4,7 @@ const logger = {
   info: log => {
     console.info(`${moment().format('YYYY-MM-DD HH:mm:ss')} [INFO] ${log}`)
   },
-  err: log => {
+  error: log => {
     console.error(`${moment().format('YYYY-MM-DD HH:mm:ss')} [ERROR] ${log}`)
   }
 }

@@ -6,14 +6,14 @@ const serve = require('koa-static');
 const server = require('http').createServer(app.callback())
 const io = require('socket.io')(server)
 
-const SerialPort = require('serialport')
-const port = new SerialPort('COM4', {
-  baudRate: 115200
-})
-
 const config = require('./config')
 const resolve = require('./service/resolve')
 const logger = require('./logger')
+
+const SerialPort = require('serialport')
+const port = new SerialPort(config.app.serialport, {
+  baudRate: 115200
+})
 
 app.use(serve(__dirname + '/public'))
 
