@@ -1,6 +1,6 @@
 const config = {
   app: {
-    port: 9010,
+    port: 80,
     serialport: 'COM4',
     // serialport: '/dev/ttyUSB0',
   }
