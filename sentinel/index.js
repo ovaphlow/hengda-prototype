@@ -21,11 +21,11 @@ soap.createClient(url, (err, client) => {
   //     console.error(err);
   //     return;
   //   }
-  // console.log(result);
-  // console.log(result.getRegionDatasetResult);
-  // console.log(result.getRegionDatasetResult.schema);
-  // console.log(result.getRegionDatasetResult.diffgram);
-  // console.log(result.getRegionDatasetResult.diffgram.getRegion.Province);
+  //   console.log(result);
+  //   console.log(result.getRegionDatasetResult);
+  //   console.log(result.getRegionDatasetResult.schema);
+  //   console.log(result.getRegionDatasetResult.diffgram);
+  //   console.log(result.getRegionDatasetResult.diffgram.getRegion.Province);
   // });
 
   // client.getRegionProvince({}, (err, result) => {
