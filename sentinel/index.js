@@ -55,7 +55,7 @@ function setStationTrackTrunkInsulateRecord() {
     }
 
     client.setStationTrackTrunkInsulateRecord(
-      { licenseCode: '', testRecord: '' },
+      { licenseCode: '', testRecord: '[]' },
       (err, result) => {
         if (err) {
           console.error(err);
@@ -78,7 +78,7 @@ function setStationTrackSupplyInsulateRecord() {
     }
 
     client.setStationTrackSupplyInsulateRecord(
-      { licenseCode: '', testRecord: '' },
+      { licenseCode: '', testRecord: '[]' },
       (err, result) => {
         if (err) {
           console.error(err);
@@ -93,6 +93,6 @@ function setStationTrackSupplyInsulateRecord() {
 if (require.main === module) {
   // getWeather('哈尔滨');
   // getGrantKmisInterFaceD();
-  // setStationTrackTrunkInsulateRecord();
-  setStationTrackSupplyInsulateRecord();
+  setStationTrackTrunkInsulateRecord();
+  // setStationTrackSupplyInsulateRecord();
 }
