@@ -48,6 +48,30 @@ function getGrantKmisInterFaceD() {
 function setStationTrackTrunkInsulateRecord() {
   const url = 'http://118.26.65.36:6688/kifsd/service/KmisIfsdInfo?wsdl';
 
+  const data = [
+    {
+      primaryKey: '1', //单号主键值
+      stationId: '00430', //客整所编码，接口规范附录3.3
+      cycleName: '1', //交路车次
+      groupId: '1', //编组
+      trainId: '1', //车号
+      testDate: '2020-01-01 12:34:56', //测试时间
+      testLine: '1', //测试线路
+      testType: '1', //测试类型
+      testHumidity: '50', //湿度
+      uvValue: '0',
+      uwValue: '0',
+      unValue: '0',
+      ugValue: '0',
+      vwValue: '0',
+      vnValue: '0',
+      vgValue: '0',
+      wnValue: '0',
+      wgValue: '0',
+      ngValue: '0',
+    },
+  ];
+
   soap.createClient(url, (err, client) => {
     if (err) {
       console.error(err);
@@ -55,7 +79,7 @@ function setStationTrackTrunkInsulateRecord() {
     }
 
     client.setStationTrackTrunkInsulateRecord(
-      { licenseCode: '', testRecord: '[]' },
+      { licenseCode: '', testRecord: JSON.stringify(data) },
       (err, result) => {
         if (err) {
           console.error(err);
@@ -71,6 +95,22 @@ function setStationTrackTrunkInsulateRecord() {
 function setStationTrackSupplyInsulateRecord() {
   const url = 'http://118.26.65.36:6688/kifsd/service/KmisIfsdInfo?wsdl';
 
+  const data = [
+    {
+      primaryKey: '1', //单号主键值
+      stationId: '00430', //客整所编码，接口规范附录3.3
+      cycleName: '1', //交路车次
+      groupId: '1', //编组
+      trainId: '1', //车号
+      testDate: '2020-01-01 12:34:56', //测试时间
+      testType: '1', //测试类型
+      plusElectric: '1', //正线电压
+      minusElectric: '1', //负线电压
+      plusResistance: '1', //正线电阻
+      minusResistance: '1', //负线电阻
+    },
+  ];
+
   soap.createClient(url, (err, client) => {
     if (err) {
       console.error(err);
@@ -78,7 +118,7 @@ function setStationTrackSupplyInsulateRecord() {
     }
 
     client.setStationTrackSupplyInsulateRecord(
-      { licenseCode: '', testRecord: '[]' },
+      { licenseCode: '', testRecord: JSON.stringify(data) },
       (err, result) => {
         if (err) {
           console.error(err);
@@ -94,5 +134,5 @@ if (require.main === module) {
   // getWeather('哈尔滨');
   // getGrantKmisInterFaceD();
   setStationTrackTrunkInsulateRecord();
-  // setStationTrackSupplyInsulateRecord();
+  setStationTrackSupplyInsulateRecord();
 }
