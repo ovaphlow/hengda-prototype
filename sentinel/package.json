@@ -1,0 +1,9 @@
+{
+  "name": "sentinel",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "soap": "^0.33.0"
+  }
+}
