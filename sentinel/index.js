@@ -28,11 +28,12 @@ function getGrantKmisInterFaceD() {
       return;
     }
 
-    client.getGrantKmisInterFaceD(`00554@1`, (err, result) => {
+    client.getGrantKmisInterFaceD(`00554@NTF02022020`, (err, result) => {
       if (err) {
         console.error(err);
         return;
       }
+      console.info('grantCode:');
       console.info(result);
     });
   });
@@ -134,5 +135,5 @@ if (require.main === module) {
   // getWeather('哈尔滨');
   // getGrantKmisInterFaceD();
   setStationTrackTrunkInsulateRecord();
-  setStationTrackSupplyInsulateRecord();
+  // setStationTrackSupplyInsulateRecord();
 }
