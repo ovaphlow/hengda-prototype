@@ -28,21 +28,21 @@ function getGrantKmisInterFaceD() {
       return;
     }
 
-    client.getGrantKmisInterFaceD(`00554@NTF02022020`, (err, result) => {
-      if (err) {
-        console.error(err);
-        return;
-      }
-      console.info('grantCode:');
-      console.info(result);
-    });
+    client.getGrantKmisInterFaceD(
+      { grantParm: '00554@NTF02022020' },
+      (err, result) => {
+        if (err) {
+          console.error(err);
+          return;
+        }
+        console.info(result.out.KmisIfsdLicInfo);
+      },
+    );
   });
 
   // getGrantKmisInterFaceD(String grantParm)
   // grantParm: 单位编码（附录3.2）+"@"+厂商编码（以传真方式向京天威申请/申请表格在附录3.4？）
-  // setInsulationInfo
   // String licenseCode
-  // List insulationInfo
 }
 
 // 运用车间站场干线绝缘测试记录
@@ -80,7 +80,10 @@ function setStationTrackTrunkInsulateRecord() {
     }
 
     client.setStationTrackTrunkInsulateRecord(
-      { licenseCode: '', testRecord: JSON.stringify(data) },
+      {
+        licenseCode: '19ead2e9d65907eeedd2760880a3d399',
+        testRecord: JSON.stringify(data),
+      },
       (err, result) => {
         if (err) {
           console.error(err);
@@ -119,7 +122,10 @@ function setStationTrackSupplyInsulateRecord() {
     }
 
     client.setStationTrackSupplyInsulateRecord(
-      { licenseCode: '', testRecord: JSON.stringify(data) },
+      {
+        licenseCode: '19ead2e9d65907eeedd2760880a3d399',
+        testRecord: JSON.stringify(data),
+      },
       (err, result) => {
         if (err) {
           console.error(err);
